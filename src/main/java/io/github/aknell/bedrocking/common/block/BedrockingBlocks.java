@@ -5,6 +5,7 @@ import io.github.aknell.bedrocking.common.item.BedrockingItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -17,10 +18,14 @@ public class BedrockingBlocks {
 
 	public static Block registerBlock(String name, Block block, ItemGroup tab) {
 		if(tab != null) {
-			BedrockingItems.registerItem(name, new BlockItem(block, new QuiltItemSettings().group(tab).fireproof()));
+			registerBlockItem(name, block, tab);
 		}
 
 		return Registry.register(Registry.BLOCK, new Identifier(BedrockingMod.MOD_ID, name), block);
+	}
+
+	public static Item registerBlockItem(String name, Block block, ItemGroup tab) {
+		return Registry.register(Registry.ITEM, new Identifier(BedrockingMod.MOD_ID, name), new BlockItem(block, new QuiltItemSettings().group(tab).fireproof()));
 	}
 
 	public static void init() {
